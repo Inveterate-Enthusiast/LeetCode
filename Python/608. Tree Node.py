@@ -22,9 +22,37 @@
 import pandas as pd
 import os
 from pathlib import Path
+import numpy as np
+
+def applying(df: pd.Series) -> str:
+    if df["p_id"] is pd.NA:
+        return "Root"
+    elif df["c_id"]:
+        return "Inner"
+    else:
+        return "Leaf"
 
 def tree_node(tree: pd.DataFrame) -> pd.DataFrame:
-    pass
+    if tree.empty:
+        tree["type"] = pd.NA
+    else:
+        tree["c_id"] = tree["id"].isin(tree["p_id"])
+        tree["type"] = tree.apply(applying, axis=1)
+    return tree.loc[:, ["id", "type"]]
+
+def tree_node1(tree: pd.DataFrame) -> pd.DataFrame:
+    Conditions = [
+        tree["p_id"].isna(),
+        tree["id"].isin(tree["p_id"])
+    ]
+    Choices = [
+        "Root",
+        "Inner"
+    ]
+    tree["type"] = np.select(Conditions, Choices, default="Leaf")
+    return tree.loc[:, ["id", "type"]]
+
 
 path = Path(os.getcwd()) / "data" / "608. Tree Node.xlsx"
-tree = pd.r
+tree = pd.read_excel(path)
+print(tree_node1(tree))
