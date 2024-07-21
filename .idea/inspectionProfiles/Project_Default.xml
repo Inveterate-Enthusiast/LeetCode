@@ -1,0 +1,76 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="55">
+            <item index="0" class="java.lang.String" itemvalue="httpx" />
+            <item index="1" class="java.lang.String" itemvalue="PySimpleGUI" />
+            <item index="2" class="java.lang.String" itemvalue="protobuf" />
+            <item index="3" class="java.lang.String" itemvalue="pygame" />
+            <item index="4" class="java.lang.String" itemvalue="pytweening" />
+            <item index="5" class="java.lang.String" itemvalue="Babel" />
+            <item index="6" class="java.lang.String" itemvalue="python-dotenv" />
+            <item index="7" class="java.lang.String" itemvalue="markdown-it-py" />
+            <item index="8" class="java.lang.String" itemvalue="tables" />
+            <item index="9" class="java.lang.String" itemvalue="trio" />
+            <item index="10" class="java.lang.String" itemvalue="gradio_client" />
+            <item index="11" class="java.lang.String" itemvalue="TBB" />
+            <item index="12" class="java.lang.String" itemvalue="PyQt5" />
+            <item index="13" class="java.lang.String" itemvalue="starlette" />
+            <item index="14" class="java.lang.String" itemvalue="certifi" />
+            <item index="15" class="java.lang.String" itemvalue="anaconda-navigator" />
+            <item index="16" class="java.lang.String" itemvalue="uvicorn" />
+            <item index="17" class="java.lang.String" itemvalue="jax" />
+            <item index="18" class="java.lang.String" itemvalue="PyAutoGUI" />
+            <item index="19" class="java.lang.String" itemvalue="service-identity" />
+            <item index="20" class="java.lang.String" itemvalue="pydantic" />
+            <item index="21" class="java.lang.String" itemvalue="tensorboard-data-server" />
+            <item index="22" class="java.lang.String" itemvalue="keras-nightly" />
+            <item index="23" class="java.lang.String" itemvalue="altair" />
+            <item index="24" class="java.lang.String" itemvalue="openai" />
+            <item index="25" class="java.lang.String" itemvalue="mdit-py-plugins" />
+            <item index="26" class="java.lang.String" itemvalue="dash" />
+            <item index="27" class="java.lang.String" itemvalue="ua-parser" />
+            <item index="28" class="java.lang.String" itemvalue="httpcore" />
+            <item index="29" class="java.lang.String" itemvalue="freetype-py" />
+            <item index="30" class="java.lang.String" itemvalue="gradio" />
+            <item index="31" class="java.lang.String" itemvalue="tb-nightly" />
+            <item index="32" class="java.lang.String" itemvalue="undetected-chromedriver" />
+            <item index="33" class="java.lang.String" itemvalue="trio-websocket" />
+            <item index="34" class="java.lang.String" itemvalue="spectral-cube" />
+            <item index="35" class="java.lang.String" itemvalue="yfinance" />
+            <item index="36" class="java.lang.String" itemvalue="selenium" />
+            <item index="37" class="java.lang.String" itemvalue="conda" />
+            <item index="38" class="java.lang.String" itemvalue="dearpygui" />
+            <item index="39" class="java.lang.String" itemvalue="tf-nightly" />
+            <item index="40" class="java.lang.String" itemvalue="tf-estimator-nightly" />
+            <item index="41" class="java.lang.String" itemvalue="websockets" />
+            <item index="42" class="java.lang.String" itemvalue="PyScreeze" />
+            <item index="43" class="java.lang.String" itemvalue="pyarrow" />
+            <item index="44" class="java.lang.String" itemvalue="PyOpenGL" />
+            <item index="45" class="java.lang.String" itemvalue="magic-filter" />
+            <item index="46" class="java.lang.String" itemvalue="aiofiles" />
+            <item index="47" class="java.lang.String" itemvalue="torch" />
+            <item index="48" class="java.lang.String" itemvalue="python-telegram-bot" />
+            <item index="49" class="java.lang.String" itemvalue="tf_nightly_intel" />
+            <item index="50" class="java.lang.String" itemvalue="selenium-shortcuts" />
+            <item index="51" class="java.lang.String" itemvalue="fastapi" />
+            <item index="52" class="java.lang.String" itemvalue="glue-core" />
+            <item index="53" class="java.lang.String" itemvalue="pychrome" />
+            <item index="54" class="java.lang.String" itemvalue="frozendict" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="TestSeleniumOnPortal.План" />
+          <option value="list.getattribute" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
