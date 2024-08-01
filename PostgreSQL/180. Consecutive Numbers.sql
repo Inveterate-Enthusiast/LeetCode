@@ -63,3 +63,32 @@ FROM recursion
 WHERE num IS NOT NULL
 GROUP BY num
 HAVING MAX(our_count) >= 3;
+
+
+3.
+WITH ordered AS
+    (SELECT *
+    FROM Logs
+    ORDER BY id ASC),
+checked AS
+    (SELECT *, (
+        CASE
+            WHEN
+                (COUNT(*) OVER(ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) = 3)
+                AND
+                (num = MIN(num) OVER(ROWS BETWEEN 2 PRECEDING AND CURRENT ROW))
+                AND
+                (num = MAX(num) OVER(ROWS BETWEEN 2 PRECEDING AND CURRENT ROW))
+                AND
+                (
+                    (MAX(id) OVER(ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)) -
+                    (MIN(id) OVER(ROWS BETWEEN 2 PRECEDING AND CURRENT ROW))
+                = 2)
+                THEN 1
+            ELSE 0
+        END
+    ) AS our_check
+    FROM ordered)
+SELECT DISTINCT num AS ConsecutiveNums
+FROM checked
+WHERE our_check = 1;
