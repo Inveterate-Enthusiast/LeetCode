@@ -50,3 +50,15 @@ ON main.product_id = sub1.product_id
 LEFT JOIN
 Products AS sub2
 ON main.product_id = sub2.product_id AND sub1.change_date = sub2.change_date;
+
+
+3.
+WITH past_time AS
+    (SELECT *, DENSE_RANK() OVER(PARTITION BY product_id ORDER BY change_date DESC) AS our_rank
+    FROM Products
+    WHERE change_date <= '2019-08-16'::DATE)
+SELECT main.product_id, COALESCE(sub.new_price, 10) AS price
+FROM (SELECT DISTINCT product_id FROM Products) AS main
+LEFT JOIN
+(SELECT * FROM past_time WHERE our_rank = 1) AS sub
+ON main.product_id = sub.product_id;

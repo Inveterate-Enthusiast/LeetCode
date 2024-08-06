@@ -28,3 +28,12 @@ WITH ranked AS
 SELECT person_name
 FROM ranked
 WHERE ARRAY[our_sum, turn] = (SELECT ARRAY[MAX(our_sum), MAX(turn)] FROM ranked WHERE our_sum <= 1000);
+
+2.
+WITH ranked AS
+    (SELECT *,
+    SUM(weight) OVER (ORDER BY turn ASC) AS our_sum
+    FROM Queue)
+SELECT person_name
+FROM ranked
+WHERE turn = (SELECT MAX(turn) FROM ranked WHERE our_sum <= 1000);
