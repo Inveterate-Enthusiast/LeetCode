@@ -13,4 +13,20 @@ def getRow1(rowIndex: int) -> list[int]:
                 OurTriangle[floorIndex][cellIndex] = OurTriangle[floorIndex-1][cellIndex-1] + OurTriangle[floorIndex-1][cellIndex]
     return OurTriangle[rowIndex]
 
-print(getRow1(1))
+def getRow2(self, rowIndex: int) -> List[int]:
+        if rowIndex == 0:
+            return [1]
+        
+        result = list()
+        for i in range(rowIndex + 1):
+            result.append(list())
+            for j in range(i + 1):
+                result[i].append(list())
+                if j == 0 or j == i:
+                    result[i][j] = 1
+                else:
+                    result[i][j] = result[i-1][j-1] + result[i-1][j]
+        else:
+            return result[i]
+
+print(getRow2(1))

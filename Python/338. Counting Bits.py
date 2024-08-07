@@ -39,4 +39,16 @@ def countBits2(n: int) -> list[int]:
 
     return ResultList
 
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        if n == 0:
+            return [0]
+        
+        result = [None] * (n + 1)
+        for i, _ in enumerate(result):
+            result[i] = str(bin(i)).count("1")
+        
+        return result
+
+
 print(countBits2(2))
