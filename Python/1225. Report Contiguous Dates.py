@@ -29,6 +29,7 @@
 #
 # Return the result table ordered by start_date.
 import pandas as pd
+import numpy as np
 from pathlib import Path
 import os
 
@@ -58,7 +59,23 @@ def report_contiguous_dates(failed: pd.DataFrame, succeeded: pd.DataFrame) -> pd
     return result
 
 
+def report_contiguous_dates1(failed: pd.DataFrame, succeeded: pd.DataFrame) -> pd.DataFrame:
+    start_date = pd.Timestamp(year=2019, month=1, day=1)
+    end_date = pd.Timestamp(year=2019, month=12, day=31)
+    failed["period_state"] = "failed"
+    succeeded["period_state"] = "succeeded"
+    unioned = pd.concat([
+        failed.rename(columns={"fail_date": "date"}),
+        succeeded.rename(columns={"success_date": "date"})
+    ]).query("(date >= @start_date) & (date <= @end_date)").sort_values(by="date", ascending=True)
+    unioned["prev_state"] = unioned["period_state"].shift(1)
+    unioned["bool"] = np.where((pd.notna(unioned["prev_state"])) & (unioned["period_state"] != unioned["prev_state"]), 1, 0)
+    unioned["group"] = unioned["bool"].cumsum()
+    unioned["start_date"] = unioned.groupby(by="group", as_index=False)["date"].transform("min")
+    unioned["end_date"] = unioned.groupby(by="group", as_index=False)["date"].transform("max")
+    return unioned[["period_state", "start_date", "end_date"]].drop_duplicates(keep="first").sort_values(by="start_date", ascending=True)
+
 path = Path(os.getcwd()) / "data" / "1225. Report Contiguous Dates.xlsx"
 failed = pd.read_excel(path, sheet_name="Failed")
 succeeded = pd.read_excel(path, sheet_name="Succeeded")
-print(report_contiguous_dates(failed, succeeded))
+print(report_contiguous_dates1(failed, succeeded))

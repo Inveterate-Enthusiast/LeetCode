@@ -16,3 +16,25 @@ Return the result table ordered by customer_id in ascending order.
 
 
 1.
+WITH sub AS (
+    SELECT
+        main.customer_id,
+        main.transaction_date AS date_1,
+        sub.transaction_date AS date_2,
+        main.amount,
+        main.transaction_date - (ROW_NUMBER() OVER(PARTITION BY main.customer_id ORDER BY main.transaction_date) * INTERVAL '1 DAY') AS diff
+    FROM Transactions AS main
+
+    INNER JOIN Transactions AS sub
+        ON sub.customer_id = main.customer_id
+        AND sub.transaction_date = (main.transaction_date + INTERVAL '1 DAY')
+        AND sub.amount > main.amount
+)
+SELECT
+    customer_id,
+    MIN(date_1) AS consecutive_start,
+    MAX(date_2) AS consecutive_end
+FROM sub
+GROUP BY customer_id, diff
+HAVING COUNT(*) >= 2
+ORDER BY customer_id;
