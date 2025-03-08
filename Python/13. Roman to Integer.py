@@ -22,8 +22,62 @@
 
 class Solution:
     def romanToInt(self, s: str) -> int:
+        our_dict = {
+            "I": [1, set(["V", "X"])],
+            "V": [5, set([])],
+            "X": [10, set(["L", "C"])],
+            "L": [50, set([])],
+            "C": [100, set(["D", "M"])],
+            "D": [500, set([])],
+            "M": [1000, set([])]
+        }
+        min_set = {"I", "X", "C"}
+        result = list()
+        temp = 0
+        prev = 0
+        n = len(s)
+        for i in range(n):
+            if s[i] in min_set:
+                if (i + 1) < n and s[i + 1] in our_dict[s[i]][1]:
+                    temp = our_dict[s[i]][0]
+                else:
+                    if s[i] == prev:
+                        if result:
+                            result[-1] += our_dict[s[i]][0]
+                        else:
+                            result.append(our_dict[prev][0] + our_dict[s[i]][0])
+                    else:
+                        result.append(our_dict[s[i]][0] - temp)
+                        temp = 0
+            else:
+                result.append(our_dict[s[i]][0] - temp)
+                temp = 0
+            prev = s[i]
+        return sum(result)
+
+    def romanToInt1(self, s: str) -> int:
+        our_dict = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
+        }
+
+        result = 0
+        prev = 0
+        for i in range(len(s) - 1, -1, -1):
+            v = our_dict[s[i]]
+            if v < prev:
+                result -= v
+            else:
+                result += v
+            prev = v
+        return result
 
 
-s = "LVIII"
+s = "III"
 X = Solution()
 print(X.romanToInt(s))
